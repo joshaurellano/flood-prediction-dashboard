@@ -73,7 +73,7 @@ function Homescreen() {
                         Protecting Barangays</h1>
                     <p className='my-4'style={{color:'white', textAlign:'center', textShadow: '2px 2px black',fontSize:'20px'}}>A data-driven flood monitoring and forecasting system</p>
                     <div style={{display:'flex',justifyContent:'center'}}>
-                        <Button variant='outline-primary' size='lg' style={{color:'white', width:'300px', borderRadius:'24px', borderWidth:'2px'}}>
+                        <Button href="/login" variant='outline-primary' size='lg' style={{color:'white', width:'300px', borderRadius:'24px', borderWidth:'1px'}}>
                             Login <FaArrowRight />
 
                         </Button>
