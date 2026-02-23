@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom'
-import { createClient } from "@supabase/supabase-js";
+
+import supabase from './supabase-client';
+
 import { Button } from 'react-bootstrap';
-
-const supabase = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_PUBLISHABLE_DEFAULT_KEY);
-
 
 function Dashboard() {
 
