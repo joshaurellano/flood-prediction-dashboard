@@ -1,25 +1,25 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { createClient } from "@supabase/supabase-js";
 
-const supabase = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_PUBLISHABLE_DEFAULT_KEY);
+import supabase from './supabase-client';
 
-
-import { Form, Row, Col, Button, Container } from 'react-bootstrap'
+import { Form, Row, Col, Button, Container, FormControl } from 'react-bootstrap'
 
 import { FaUserCircle } from "react-icons/fa";
+import { IoIosEyeOff } from "react-icons/io";
+import { IoIosEye } from "react-icons/io";
+
 
 function Login() {
   // Variable declarations
-  let time  = new Date().toLocaleTimeString()
-  let dateNow = new Date()
+
   const navigate = useNavigate();
 
-  const [ctime,setTime] = useState(time)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
   const [userData, setuserData] = useState('')
-
+ 
 
   useEffect(() =>{
     async function checkSession() {
@@ -38,60 +38,84 @@ function Login() {
       password: password
     })
 
-    console.log(data)
-
-    if (error){
-      alert('Error logging in')
-    }
-    else{
+    if(data.session != null){
       setuserData(data)
-      navigate ('/dashboard')
+      navigate('/dashboard')
+    }
+    else {
+      if(error.message == 'Invalid login credentials') {
+        setError(error.message)
+      }
     }
   }
   
-  const UpdateTime=()=>{
-    time =  new Date().toLocaleTimeString()
-    setTime(time)
-  }
-  setInterval(UpdateTime)
+
   return (
-    <div style={{minHeight:'100vh', maxWidth:'100vw',overflowX:'hidden'}}>
-      <Col style={{display:'flex',justifyContent:'center', flexDirection:'column', textAlign:'center'}}>
-        <div style={{textAlign:'center'}}>
-          <h1 style={{fontWeight:'bold'}}>{ctime}</h1>
-          <p>{dateNow.toDateString()}</p>
-        </div>
-        <div>
-          <FaUserCircle style={{
-            fontSize:'160px'
-          }}/>
-        </div>
-        <div style={{display:'flex',justifyContent:'center'}}>
-          <Form style={{width:'300px'}} onSubmit={signInWithEmail}>
-            <Form.Group className='py-2'>
-              <Form.Control style={{borderRadius:'20px'}} type='text' placeholder='Email' 
-              onChange={(event) =>{setEmail(event.target.value)}}/>
-            </Form.Group>
+    <div style={{maxHeight:'100vh', maxWidth:'100vw',overflowX:'hidden'}}>
+      <Row>
+        <Col style={{height: '100vh',
+        backgroundImage: `url("https://res.cloudinary.com/dgjbvgwiv/image/upload/v1771849872/jonathan-ford-6ZgTEtvD16I-unsplash_swrwpv.jpg")`,
+        backgroundRepeat:'no-repeat',
+        backgroundSize: "cover",
+        width: '100%',
+        overflowX:'hidden',
+        overflowY:'hidden'}}>
+          <div style={{height:'100%', width:'100%', display:'flex', justifyContent:'center', alignItems:'center'}}>
             
-            <Form.Group style={{paddingBottom:'10px'}}>
-              <Form.Control style={{borderRadius:'20px'}} type='password' placeholder='Password'
-               onChange={(event) => {setPassword(event.target.value)}}/>
-            </Form.Group>
+          </div>
 
-            <Form.Group style={{display:'flex', flexDirection:'column', justifyContent:'center', width:'100%'}}>
-              <div style={{display:'flex', width:'100%', justifyContent:'center'}}>
-                <Button type='submit' style={{borderRadius:'20px',width:'200px',justifyContent:'center', display:'flex'}}> 
-                  Submit
-                </Button>
-              </div>
+        </Col>
+
+        <Col style={{height: '100vh', width:'100%', overflowY:'hidden'}}>
+
+          <div style={{height:'100%', display:'flex', justifyContent:'space-between', alignItems:'center', flexDirection:'column'}}>
+            
+            <div></div>
+
+            <Form style={{width:'300px'}} onSubmit={signInWithEmail}>
+              <span style={{fontSize:'20px', fontWeight:'bold', display:'flex', justifyContent:'center', width:'100%'}}>Login</span>
+              <Form.Group className='py-3'>
+                <Form.Control style={{height:'50px'}} type='text' placeholder='Email' 
+                onChange={(event) =>{
+                  setEmail(event.target.value)
+                  setError('')
+                }}/>
+              </Form.Group>
               
-            </Form.Group>
-          </Form>
-        </div>
-  
-      </Col>
+              <Form.Group style={{paddingBottom:'10px'}}>
+                <Form.Control style={{height:'50px'}} type='password' placeholder='Password'
+                onChange={(event) => {
+                  setPassword(event.target.value)
+                  setError('')
+                  }}/>
+              </Form.Group>
 
-      
+              <Form.Text style={{width:'100%', display:'flex', justifyContent:'end', paddingBottom:'15px'}}>
+                <span>Forgot Password?</span>
+              </Form.Text>
+
+              <Form.Group style={{display:'flex', flexDirection:'column', justifyContent:'center', width:'100%', paddingBottom:'20px'}}>
+                  {error && <p style={{color:'red'}}>{error} </p>}
+                
+                <div style={{display:'flex', width:'100%', justifyContent:'center'}}>
+                  <Button type='submit' style={{width:'100%',justifyContent:'center', display:'flex'}}> 
+                    Submit
+                  </Button>
+                </div>
+                
+              </Form.Group>
+
+              <hr />
+            </Form>
+
+            <span>All rights reserved 2026</span>
+          </div>
+
+          
+    
+        </Col>
+
+        </Row>
     </div>
   )
 }
