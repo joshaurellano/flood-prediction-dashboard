@@ -47,13 +47,6 @@ function Homescreen() {
                         }}>Contact Us</Nav.Link>
 
                     </Nav>
-
-                    <Button variant='primary' style={{
-                        color:'white',
-                        borderRadius:'24px'
-                    }}>
-                        Register
-                    </Button>
                 </Container>
                 
             </Navbar>

@@ -85,7 +85,6 @@ function Login() {
                 </Button>
               </div>
               
-              <Form.Text>No account yet? Sign up here</Form.Text>
             </Form.Group>
           </Form>
         </div>
