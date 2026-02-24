@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 import supabase from './supabase-client';
 
@@ -7,26 +7,36 @@ import { Button } from 'react-bootstrap';
 
 function Dashboard() {
 
-    const [userData, setuserData] = useState('')
+    const [userData, setUserData] = useState('')
     const navigate = useNavigate()
+    const location = useLocation();
 
     async function signOut() {
-    const { error } = await supabase.auth.signOut()
-    navigate('/')
+        const { error } = await supabase.auth.signOut()
+        navigate('/')
+
+        if(error){
+            alert('Error logging out')
+        }
     }
 
     useEffect(() =>{
         async function checkSession() {
-            const { data, error } = await supabase.auth.getSession()
-              if (!data.session) {  // ✅ check for null session instead
-                navigate('/login')
+            if(location.state){
+                setUserData(location.state.userData.session.user)
             } else {
-                setuserData(data.session.user)  // store just the user object
+                const { data, error } = await supabase.auth.getSession()
+                
+                    if (!data.session || error) {  
+                        navigate('/login')
+                    } else {
+                        setUserData(data.session.user)  
+                    }
             }
         }
         
     checkSession()
-    }, [])
+    }, [navigate, location, userData])
 
   return (
     <div>

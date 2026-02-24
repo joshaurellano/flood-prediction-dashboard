@@ -18,17 +18,21 @@ function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
-  const [userData, setuserData] = useState('')
  
 
   useEffect(() =>{
+    // Check if there is already session
     async function checkSession() {
-      const { data, error } = await supabase.auth.getSession()
-      setuserData(data)
+      const { data } = await supabase.auth.getSession()
 
+      // Pass the user and session data on the dashbaord if session is available
+      if(data.session){
+        navigate('/dashboard',{state:{userData: data}})
+      } 
+      
     }
     checkSession()
-  }, [])
+  }, [navigate])
 
   async function signInWithEmail(event) {
 
@@ -39,8 +43,8 @@ function Login() {
     })
 
     if(data.session != null){
-      setuserData(data)
-      navigate('/dashboard')
+      console.log(data)
+      navigate('/dashboard',{state:{userData: data}})
     }
     else {
       if(error.message == 'Invalid login credentials') {
