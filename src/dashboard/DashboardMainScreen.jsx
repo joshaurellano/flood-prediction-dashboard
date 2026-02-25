@@ -1,24 +1,16 @@
 import React, {useEffect, useState} from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 
-import supabase from './supabase-client';
-
-import { Button } from 'react-bootstrap';
+import supabase from '../supabase-client';
+import NavigationBar from './components/NavigationBar';
+import Sidebar from './components/Sidebar';
+import { Col, Row } from 'react-bootstrap';
 
 function Dashboard() {
 
     const [userData, setUserData] = useState('')
     const navigate = useNavigate()
     const location = useLocation();
-
-    async function signOut() {
-        const { error } = await supabase.auth.signOut()
-        navigate('/')
-
-        if(error){
-            alert('Error logging out')
-        }
-    }
 
     useEffect(() =>{
         async function checkSession() {
@@ -39,10 +31,19 @@ function Dashboard() {
     }, [navigate, location, userData])
 
   return (
-    <div>
-        <h1>{userData && userData.email}</h1>
+    <div style={{minHeight:'100vh', maxWidth:'100vw'}}>
+        <Row style={{height:'100vh'}}>
+            <Col lg={2}style={{borderRight:'1px solid black'}}>
+                <Sidebar />
+            </Col>
 
-        <Button onClick={signOut}>Logout</Button>
+            <Col lg={10}>
+                <NavigationBar />
+                <h1>Dashboard</h1>
+
+            </Col>
+        </Row>
+    
     </div>
   )
 }

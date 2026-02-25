@@ -1,0 +1,10 @@
+#basic-nav-dropdown.dropdown-toggle {
+    display: flex !important;
+    align-items: center !important;
+    gap: 5px;
+}
+
+#basic-nav-dropdown.dropdown-toggle::after {
+    border-top-color: white;
+    margin: 0;
+}
