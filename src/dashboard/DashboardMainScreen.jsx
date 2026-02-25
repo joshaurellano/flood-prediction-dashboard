@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import supabase from '../supabase-client';
 import NavigationBar from './components/NavigationBar';
 import Sidebar from './components/Sidebar';
-import { Col, Row } from 'react-bootstrap';
+import { Col, Row, Container, Card } from 'react-bootstrap';
 
 function Dashboard() {
 
@@ -33,13 +33,52 @@ function Dashboard() {
   return (
     <div style={{minHeight:'100vh', maxWidth:'100vw'}}>
         <Row style={{height:'100vh'}}>
-            <Col lg={2}style={{borderRight:'1px solid black'}}>
+            <Col lg={2} style={{paddingRight:0}}>
                 <Sidebar />
             </Col>
 
-            <Col lg={10}>
+            <Col lg={10} style={{paddingLeft:0}}>
                 <NavigationBar />
-                <h1>Dashboard</h1>
+                    <Container style={{padding:'15px'}}>
+                        <h3>Dashboard</h3>
+                        <Row>
+                            <Col>
+                                <Card>
+                                    <Card.Header>Flood Risk Level</Card.Header>
+                                    <Card.Body>
+                                        <span>Some data here</span>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                            <Col>
+                                <Card>
+                                    <Card.Header>Rain Intensity</Card.Header>
+                                    <Card.Body>
+                                        <span>Some data here</span>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                        </Row>
+                        <Row className='mt-3'>
+                            <Col>
+                                <Card>
+                                    <Card.Header>PAGASA Alert Level</Card.Header>
+                                    <Card.Body>
+                                        <span>Some data here</span>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                            <Col>
+                                <Card>
+                                    <Card.Header>Rainfall Forecast Next 6 hrs</Card.Header>
+                                    <Card.Body>
+                                        <span>Some data here</span>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                        </Row>
+                    </Container>
+                
 
             </Col>
         </Row>

@@ -21,7 +21,7 @@ function NavigationBar() {
 
   return (
     <div>
-        <Navbar bg='primary' style={{maxWidth:'100%'}}>
+        <Navbar bg='primary' style={{maxWidth:'100%', height:'45px'}}>
             <Container style={{width:'100%'}}>
                 <Nav className='ms-auto'>
                 <NavDropdown className='d-flex align-items-center' title={<span style={{color:'white', display:'flex', alignItems:'center', gap:'5px'}}>User: <FaUserTie /> </span>} id='basic-nav-dropdown' align='end'>

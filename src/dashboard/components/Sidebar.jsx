@@ -1,7 +1,14 @@
 import React, {useEffect, useState} from 'react'
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Col, Row, Container, Nav } from 'react-bootstrap'
+
 import supabase from '../../supabase-client';
+
+import { MdDashboard } from "react-icons/md";
+import { FaMapMarkerAlt } from "react-icons/fa";
+import { MdTextsms } from "react-icons/md";
+
+import '../styles/Sidebar.css'
 
 function Sidebar() {
 
@@ -34,17 +41,30 @@ function Sidebar() {
             <h2>Agos</h2>
         </div>
         <div>
-          <Nav variant="tabs" className='flex-column'> 
-            <Nav.Item>
-              <Nav.Link style={{color:'white'}}>Dashboard</Nav.Link>
+          <Nav className='flex-column'style={{borderBottom:'none'}}> 
+            <Nav.Item className='sideNav'>
+              <Nav.Link style={{color:'white', fontWeight:'500'}}>
+                <span>
+                  <MdDashboard /> Dashboard
+                </span>
+                
+                </Nav.Link>
             </Nav.Item>
 
-            <Nav.Item>
-              <Nav.Link style={{color:'white'}}>Map</Nav.Link>
+            <Nav.Item className='sideNav'>
+              <Nav.Link style={{color:'white', fontWeight:'500'}}>
+                <span>
+                  <FaMapMarkerAlt /> Map
+                </span>
+              </Nav.Link>
             </Nav.Item>
 
-          <Nav.Item>
-            <Nav.Link style={{color:'white'}}>Broadcast/SMS</Nav.Link>
+          <Nav.Item className='sideNav'>
+            <Nav.Link style={{color:'white', fontWeight:'500'}}>
+              <span>
+                <MdTextsms /> Broadcast/SMS
+              </span>
+            </Nav.Link>
           </Nav.Item>
 
           </Nav>
