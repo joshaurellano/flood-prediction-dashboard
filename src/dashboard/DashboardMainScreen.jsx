@@ -1,7 +1,10 @@
 import React, {useEffect, useState} from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
+import axios from 'axios';
 
 import supabase from '../supabase-client';
+import { WEATHER_API_ENDPOINT } from '../Api';
+import { WEATHER_API_KEY } from '../Api';
 import NavigationBar from './components/NavigationBar';
 import Sidebar from './components/Sidebar';
 import { Col, Row, Container, Card } from 'react-bootstrap';
@@ -9,6 +12,7 @@ import { Col, Row, Container, Card } from 'react-bootstrap';
 function Dashboard() {
 
     const [userData, setUserData] = useState('')
+    const [weatherData,  setWeatherData] = useState('')
     const navigate = useNavigate()
     const location = useLocation();
 
@@ -22,13 +26,29 @@ function Dashboard() {
                     if (!data.session || error) {  
                         navigate('/login')
                     } else {
-                        setUserData(data.session.user)  
+                        setUserData(data.session.user)
                     }
             }
         }
         
     checkSession()
     }, [navigate, location, userData])
+
+
+    const token = `Bearer ${WEATHER_API_KEY}`
+    useEffect(() => {
+        const headers = {
+            accept:'application/json',
+            Authorization: token
+        }
+        
+        const fetchWeatherData = async () => {
+            await axios.get(`${WEATHER_API_ENDPOINT}`,{headers:headers}).then((data) => {
+                setWeatherData(data)
+            })
+        }
+        fetchWeatherData()
+    }, [token]) 
 
   return (
     <div style={{minHeight:'100vh', maxWidth:'100vw'}}>
