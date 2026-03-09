@@ -117,7 +117,7 @@ function Login() {
 
             {/* Feature pills */}
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
-              {['Real-Time Alerts', 'AI Forecasting', 'Push Notifications'].map(f => (
+              {['Real-Time Alerts', 'Data-driven Forecast', 'Push Notifications'].map(f => (
                 <span key={f} style={{
                   backgroundColor: 'rgba(255,255,255,0.12)',
                   border: '1px solid rgba(255,255,255,0.22)',

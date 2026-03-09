@@ -91,32 +91,6 @@ function Homescreen() {
         padding: '0 20px',
       }}>
 
-        {/* Live badge */}
-        <div style={{
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: '8px',
-          backgroundColor: 'rgba(0,140,255,0.18)',
-          border: '1px solid rgba(0,160,255,0.35)',
-          borderRadius: '999px',
-          padding: '6px 18px',
-          marginBottom: '28px',
-          color: '#60c8ff',
-          fontSize: '12px',
-          fontWeight: '600',
-          letterSpacing: '0.08em',
-          textTransform: 'uppercase',
-        }}>
-          <span style={{
-            width: '7px', height: '7px',
-            borderRadius: '50%',
-            backgroundColor: '#38d4ff',
-            display: 'inline-block',
-            boxShadow: '0 0 6px #38d4ff',
-          }} />
-          Live Flood Monitoring System
-        </div>
-
         {/* Headline */}
         <h1 style={{
           fontSize: 'clamp(38px, 6vw, 72px)',
@@ -175,7 +149,7 @@ function Homescreen() {
           {[
             { num: 'Real-Time', label: 'Data Updates' },
             null,
-            { num: 'AI-Powered', label: 'Flood Forecasting' },
+            { num: 'Data-Driven', label: 'Flood Forecasting' },
             null,
             { num: '24 / 7', label: 'Push Alerts' },
           ].map((item, i) =>

@@ -2,15 +2,23 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { Col, Nav } from 'react-bootstrap'
 import supabase from '../../supabase-client'
-import { MdDashboard } from 'react-icons/md'
-import { FaMapMarkerAlt } from 'react-icons/fa'
-import { MdTextsms } from 'react-icons/md'
+import { MdDashboard, MdHistory, MdTextsms, MdWarning, MdBarChart } from 'react-icons/md'
 
 function Sidebar() {
   const [userData, setUserData] = useState('')
-  const [active, setActive] = useState('Dashboard')
   const navigate = useNavigate()
   const location = useLocation()
+
+  const NAV_ITEMS = [
+    { label: 'Dashboard',         icon: <MdDashboard />, path: '/dashboard' },
+    // { label: 'Flood Alerts',      icon: <MdWarning />,   path: '/alerts' },
+    { label: 'Data Analytics',    icon: <MdBarChart />,  path: '/analytics' },
+    // { label: 'Reports / History', icon: <MdHistory />,   path: '/reports' },
+    { label: 'Broadcast/SMS',     icon: <MdTextsms />,   path: '/broadcast' },
+  ]
+
+  // Derive active item directly from the current URL — no useState needed
+  const active = NAV_ITEMS.find(item => location.pathname === item.path)?.label || 'Dashboard'
 
   useEffect(() => {
     async function checkSession() {
@@ -24,12 +32,6 @@ function Sidebar() {
     }
     checkSession()
   }, [navigate, location, userData])
-
-  const NAV_ITEMS = [
-    { label: 'Dashboard', icon: <MdDashboard />, path: '/dashboard' },
-    { label: 'Analytics', icon: <FaMapMarkerAlt />, path: '/analytics' },
-    { label: 'Broadcast/SMS', icon: <MdTextsms />, path: '/broadcast' },
-  ]
 
   const avatarLetter = userData?.email ? userData.email[0].toUpperCase() : 'U'
 
@@ -90,7 +92,7 @@ function Sidebar() {
           {NAV_ITEMS.map(item => (
             <Nav.Item key={item.label}>
               <Nav.Link
-                onClick={() => { setActive(item.label); navigate(item.path) }}
+                onClick={() => navigate(item.path)}
                 style={{
                   display: 'flex',
                   alignItems: 'center',
