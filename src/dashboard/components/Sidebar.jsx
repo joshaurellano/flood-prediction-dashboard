@@ -27,7 +27,7 @@ function Sidebar() {
 
   const NAV_ITEMS = [
     { label: 'Dashboard', icon: <MdDashboard />, path: '/dashboard' },
-    { label: 'Map', icon: <FaMapMarkerAlt />, path: '/map' },
+    { label: 'Analytics', icon: <FaMapMarkerAlt />, path: '/analytics' },
     { label: 'Broadcast/SMS', icon: <MdTextsms />, path: '/broadcast' },
   ]
 

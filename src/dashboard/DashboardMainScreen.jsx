@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import axios from 'axios'
+// import axios from 'axios'
 import supabase from '../supabase-client'
-import { WEATHER_API_ENDPOINT, WEATHER_API_KEY } from '../Api'
+// import { WEATHER_API_ENDPOINT, WEATHER_API_KEY } from '../Api'
 import NavigationBar from './components/NavigationBar'
 import Sidebar from './components/Sidebar'
 import { Col, Row, Container, Card } from 'react-bootstrap'
@@ -12,7 +12,7 @@ import { WiThunderstorm } from 'react-icons/wi'
 
 function Dashboard() {
   const [userData, setUserData] = useState('')
-  const [weatherData, setWeatherData] = useState('')
+  // const [weatherData, setWeatherData] = useState('')
   const navigate = useNavigate()
   const location = useLocation()
 
@@ -32,19 +32,19 @@ function Dashboard() {
     checkSession()
   }, [navigate, location, userData])
 
-  const token = `Bearer ${WEATHER_API_KEY}`
-  useEffect(() => {
-    const headers = {
-      accept: 'application/json',
-      Authorization: token,
-    }
-    const fetchWeatherData = async () => {
-      await axios.get(`${WEATHER_API_ENDPOINT}`, { headers }).then(data => {
-        setWeatherData(data)
-      })
-    }
-    fetchWeatherData()
-  }, [token])
+  // const token = `Bearer ${WEATHER_API_KEY}`
+  // useEffect(() => {
+  //   const headers = {
+  //     accept: 'application/json',
+  //     Authorization: token,
+  //   }
+  //   const fetchWeatherData = async () => {
+  //     await axios.get(`${WEATHER_API_ENDPOINT}`, { headers }).then(data => {
+  //       setWeatherData(data)
+  //     })
+  //   }
+  //   fetchWeatherData()
+  // }, [token])
 
   const now = new Date().toLocaleTimeString('en-PH', { hour: '2-digit', minute: '2-digit' })
 
